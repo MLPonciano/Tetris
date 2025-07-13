@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Press Start 2P", sans-serif;
+    background-color: #222222;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+button {
+    font-family: "Press Start 2P", sans-serif;
+}
+#gameBody {
+    width: 350px;
+    height: 650px;
+    background-color: #b8b4b4;
+    border-radius: 40px;
+    border: 2px solid #444;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 20px;
+}
+
+#gameScreen {
+    width: 300px;
+    height: 350px;
+    background-color: #7f9c75;
+    margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px #222;
+    position: relative;
+}
+
+#game {
+    display: none;
+    grid-template-rows: repeat(20, 15px);
+    grid-template-columns: repeat(10, 15px);
+    gap: 1px;
+    border: 1px solid #222;
+    border-radius: 3px;
+    margin: 15px;
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#info {
+    width: 80px;
+    height: 100%;
+    margin-top: 15px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #222;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    font-weight: bolder;
+}
+
+.cell {
+    width: 15px;
+    height: 15px;
+    transition: background 0.2s ease;
+}
+.cell.ghost {
+    border: 1px solid #222;
+}
+
+#gameScreen::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid #222;
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.bottom-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.buttons-layout {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+}
+
+.dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.dpad button {
+    width: 45px;
+    height: 45px;
+    background-color: #444;
+    border: none;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+.dpad-center {
+    visibility: hidden;
+}
+.dpad-middle {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+.dpad i {
+    color: white;
+    font-size: 30px;
+}
+
+.dpad button:active {
+    transform: scale(0.9);
+    background-color: #222;
+}
+
+.ab-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.ab-buttons button {
+    width: 55px;
+    height: 55px;
+    background-color: #aa3333;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.ab-buttons button:active {
+    transform: scale(0.9);
+    background-color: #881111;
+}
+
+.start-button {
+    margin-top: 10px;
+    padding: 3px 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.start-button:active {
+    transform: scale(0.95);
+    background-color: #333;
+}
+
+#next {
+    display: grid;
+    grid-template-rows: repeat(4, 10px);
+    grid-template-columns: repeat(4, 10px);
+    gap: 1px;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+#next div {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #222;
+}
+
+#hold {
+    display: grid;
+    grid-template-rows: repeat(4, 10px);
+    grid-template-columns: repeat(4, 10px);
+    gap: 1px;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+#hold div {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #222;
+}
+
+#gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(127, 156, 117, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: inset 0 0 10px #222;
+}
+
+#gameOverText {
+    text-align: center;
+    color: #222;
+    font-family: "Press Start 2P", system-ui;
+    padding: 20px;
+    border-radius: 15px;
+    width: 95%;
+}
+
+#gameOverText h2 {
+    margin-bottom: 10px;
+}
