@@ -208,12 +208,12 @@ button {
     padding: 5px;
     border-radius: 5px;
     justify-content: center;
+    border: 1px solid #222;
 }
 
 #next div {
     width: 10px;
     height: 10px;
-    border: 1px solid #222;
 }
 
 #hold {
@@ -224,12 +224,12 @@ button {
     padding: 5px;
     border-radius: 5px;
     justify-content: center;
+    border: 1px solid #222;
 }
 
 #hold div {
     width: 10px;
     height: 10px;
-    border: 1px solid #222;
 }
 
 #gameOverScreen {
