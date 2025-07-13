@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <link rel="icon" type="image/x-icon" href="TETRIS.svg">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div id="gameBody">
+            <div id="gameScreen">
+                <div class="game-wrapper">
+                    <div id="game"></div>
+                    <div id="info">
+                        <span>TETRIS</span>
+                        <span>SCORE:</span>
+                        <div id="score">0</div>
+                        <span>NEXT:</span>
+                        <div id="next"></div>
+                        <span>HOLD:</span>
+                        <div id="hold"></div>
+                    </div>
+                </div>
+                <div id="gameOverScreen" style="display: none;">
+                    <div id="gameOverText">
+                        <h2>GAME OVER</h2>
+                        <p>Your Score: <span id="finalScore">0</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-area">
+                <div class="buttons-layout">
+                    <div class="dpad">
+                        <button class="dpad-up"><i class="fas fa-caret-up"></i></button>
+                        <div class="dpad-middle">
+                            <button class="dpad-left"><i class="fas fa-caret-left"></i></button>
+                            <button class="dpad-center"><i class="fas fa-circle"></i></button>
+                            <button class="dpad-right"><i class="fas fa-caret-right"></i></button>
+                        </div>
+                        <button class="dpad-down"><i class="fas fa-caret-down"></i></button>
+                    </div>
+                    <div class="ab-buttons">
+                        <button class="button-a">A</button>
+                        <button class="button-b">B</button>
+                    </div>
+                </div>
+                <button class="start-button">START</button>
+            </div>
+            <footer><a href="https://github.com/MLPonciano" target="_blank" style="font-size: 10px; text-decoration: none; color: inherit;"><i class="fab fa-github" style="font-size: 15px;"></i> MLPonciano</a>
+            </footer>
+        </div>
+        <script src="tetris.js"></script>
+        <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker registered!', reg))
+                .catch(err => console.log('Service Worker registration failed: ', err));
+            });
+        }
+        </script>
+
+</body>
+
+</html>
