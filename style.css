@@ -206,7 +206,7 @@ button {
     grid-template-columns: repeat(4, 10px);
     gap: 1px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
     justify-content: center;
     border: 1px solid #222;
 }
@@ -222,7 +222,7 @@ button {
     grid-template-columns: repeat(4, 10px);
     gap: 1px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
     justify-content: center;
     border: 1px solid #222;
 }
