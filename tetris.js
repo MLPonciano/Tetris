@@ -458,7 +458,7 @@ function addHoldButton(selector, onPress) {
                     , 50); // fast repeat rate
             }
 
-            , 300); // initial delay before repeating
+            , 500); // initial delay before repeating
     }
 
     ;
