@@ -418,15 +418,14 @@ function addHoldButton(selector, onPress) {
     if (!btn) return;
     let holdTimeout;
     let holdInterval;
-
     let isPressed = false;
 
     const start = (e) => {
-        if (isGameOver || !currentPiece) return;
-        if (isPressed) return;
+        if (isGameOver || !currentPiece || isPressed) return;
         isPressed = true;
-
         e?.preventDefault();
+
+        btn.classList.add("active");
 
         onPress();
 
@@ -445,6 +444,8 @@ function addHoldButton(selector, onPress) {
         isPressed = false;
         clearTimeout(holdTimeout);
         clearInterval(holdInterval);
+
+        btn.classList.remove("active");
     };
 
     btn.addEventListener("mousedown", start);
