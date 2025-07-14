@@ -35,11 +35,13 @@ button {
 }
 
 #console {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
     font-weight: 900;
     font-style: italic;
     color: #000080;
     font-size: 20px;
+    text-shadow: 0px 0px 1px #888888;
 }
 
 #gameBody {
@@ -90,7 +92,6 @@ button {
     margin-right: 15px;
     padding: 10px;
     border-radius: 3px;
-    border: 1px solid #222;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -100,7 +101,6 @@ button {
     color: #222;
     font-weight: bolder;
     visibility: hidden;
-    text-align: justify;
 }
 
 .cell {
@@ -115,10 +115,10 @@ button {
 #gameScreen::before {
     content: "";
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
     border: 2px solid #222;
     border-radius: 5px;
     pointer-events: none;
@@ -146,25 +146,45 @@ button {
     gap: 2px;
     border-radius: 50%;
     background: #c4c4c4;
-    box-shadow: inset 5px 5px 10px #a9a9a9,
-            inset -5px -5px 10px #c4c4c4;
-            padding: 10px;
+    box-shadow: inset 5px 5px 10px #a9a9a9, inset -5px -5px 10px #c4c4c4;
+    padding: 10px;
 }
 
 .dpad button {
     width: 45px;
     height: 45px;
-    background: linear-gradient(to bottom, #555 0%, #333 100%);
-    border: 2px solid #222;
-    border-radius: 7px;
+    background: linear-gradient(135deg, #666 0%, #333 100%);
+    border: 2px solid #111;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 4px #111,
-        0 6px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.3),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.4), 0 4px #111,
+        0 8px 12px rgba(0, 0, 0, 0.7);
+    background-blend-mode: overlay;
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
+
+.dpad button::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 8px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.1),
+        rgba(0, 0, 0, 0.2)
+    );
+    pointer-events: none;
+}
+
 .dpad-center {
     visibility: hidden;
 }
@@ -182,9 +202,10 @@ button {
 
 .dpad button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 2px #111,
-        0 3px 4px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(to bottom, #333 0%, #111 100%);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px #111,
+        0 4px 6px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(135deg, #444 0%, #111 100%);
 }
 .ab-buttons {
     display: flex;
@@ -196,45 +217,87 @@ button {
 .ab-buttons button {
     width: 55px;
     height: 55px;
-    background: radial-gradient(circle at 30% 30%, #cc4444, #aa2222);
-    border: 2px solid #811;
+    background: radial-gradient(circle at 30% 30%, #dd5555, #881111);
+    border: 3px solid #511;
     border-radius: 50%;
-    color: white;
+    color: #fff;
     font-weight: bold;
     font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2), 0 5px #600,
-        0 8px 12px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.25),
+        inset 0 -4px 6px rgba(0, 0, 0, 0.4), 0 6px #400,
+        0 10px 14px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
 }
+
+.ab-buttons button::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.15),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
 .ab-buttons button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2), 0 3px #600,
-        0 4px 6px rgba(0, 0, 0, 0.7);
-    background: radial-gradient(circle at 30% 30%, #aa2222, #881111);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.25),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.4), 0 3px #400,
+        0 5px 7px rgba(0, 0, 0, 0.8);
+    background: radial-gradient(circle at 30% 30%, #aa2222, #661111);
 }
 
 .start-button {
     margin-top: 5px;
     padding: 5px 15px;
-    background: linear-gradient(to bottom, #777, #444);
+    background: linear-gradient(145deg, #777, #444);
     color: white;
-    border: 2px solid #222;
+    border: 2px solid #111;
     border-radius: 20px;
     font-size: 12px;
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 4px #222,
-        0 6px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.4), 0 4px #222,
+        0 8px 12px rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
 }
+
+.start-button::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 18px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.1),
+        rgba(0, 0, 0, 0.2)
+    );
+    pointer-events: none;
+}
+
 .start-button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 2px #222,
-        0 3px 4px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(to bottom, #555, #222);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px #222,
+        0 4px 6px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(145deg, #555, #222);
 }
 
 #next {
@@ -287,10 +350,10 @@ button {
 #gameOverScreen::before {
     content: "";
     position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
     border: 2px solid #222;
     border-radius: 5px;
     pointer-events: none;
