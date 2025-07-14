@@ -419,48 +419,36 @@ function addHoldButton(selector, onPress) {
     let holdTimeout;
     let holdInterval;
 
-    const start = () => {
-        if (isGameOver || !currentPiece) return;
+    let isPressed = false;
 
-        // Immediate single action on press
+    const start = (e) => {
+        if (isGameOver || !currentPiece) return;
+        if (isPressed) return;
+        isPressed = true;
+
+        e?.preventDefault();
 
         onPress();
 
-        // Start delayed repeat
-
-        holdTimeout = setTimeout(
-            () => {
-                holdInterval = setInterval(
-                    () => {
-                        if (isGameOver || !currentPiece) {
-                            clearInterval(holdInterval);
-
-                            return;
-                        }
-
-                        onPress();
-                    },
-
-                    50
-                ); // fast repeat rate
-            },
-
-            300
-        ); // initial delay before repeating
+        holdTimeout = setTimeout(() => {
+            holdInterval = setInterval(() => {
+                if (isGameOver || !currentPiece) {
+                    clearInterval(holdInterval);
+                    return;
+                }
+                onPress();
+            }, 50);
+        }, 300);
     };
 
     const stop = () => {
+        isPressed = false;
         clearTimeout(holdTimeout);
-
         clearInterval(holdInterval);
     };
 
     btn.addEventListener("mousedown", start);
-
-    btn.addEventListener("touchstart", (e) => {
-        /*e.preventDefault();*/
-        start();
-    });
+    btn.addEventListener("touchstart", start, { passive: false });
     document.addEventListener("mouseup", stop);
     document.addEventListener("touchend", stop);
 }
