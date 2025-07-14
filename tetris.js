@@ -422,32 +422,43 @@ function addHoldButton(selector, onPress) {
     const start = () => {
         if (isGameOver || !currentPiece) return;
 
-        btn.classList.add("pressed");
+        // Immediate single action on press
 
         onPress();
 
-        holdTimeout = setTimeout(() => {
-            holdInterval = setInterval(() => {
-                if (isGameOver || !currentPiece) {
-                    clearInterval(holdInterval);
-                    btn.classList.remove("pressed");
-                    return;
-                }
-                onPress();
-            }, 50);
-        }, 300);
+        // Start delayed repeat
+
+        holdTimeout = setTimeout(
+            () => {
+                holdInterval = setInterval(
+                    () => {
+                        if (isGameOver || !currentPiece) {
+                            clearInterval(holdInterval);
+
+                            return;
+                        }
+
+                        onPress();
+                    },
+
+                    50
+                ); // fast repeat rate
+            },
+
+            300
+        ); // initial delay before repeating
     };
 
     const stop = () => {
         clearTimeout(holdTimeout);
+
         clearInterval(holdInterval);
-        btn.classList.remove("pressed");
     };
 
     btn.addEventListener("mousedown", start);
 
     btn.addEventListener("touchstart", (e) => {
-        e.preventDefault();
+        /*e.preventDefault();*/
         start();
     });
     document.addEventListener("mouseup", stop);
