@@ -331,6 +331,53 @@ button {
     width: 10px;
     height: 10px;
 }
+#gameStart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(127, 156, 117);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    z-index: 10;
+    box-shadow: inset 0 0 10px #222;
+}
+
+#gameStart::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid #222;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+#gameStartText {
+    text-align: center;
+    color: #222;
+    font-family: "Press Start 2P", system-ui;
+    padding: 20px;
+    border-radius: 15px;
+    width: 95%;
+}
+#gameStartText h1 {
+    margin-bottom: 20px;
+}
+#gameStartText p {
+    animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
 
 #gameOverScreen {
     position: absolute;
