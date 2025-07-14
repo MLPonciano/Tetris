@@ -77,13 +77,14 @@ button {
     border: 1px solid #222;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     font-size: 10px;
     justify-content: center;
     align-items: center;
     color: #222;
     font-weight: bolder;
     visibility: hidden;
+    text-align: justify;
 }
 
 .cell {
