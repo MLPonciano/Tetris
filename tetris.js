@@ -14,7 +14,7 @@ let gameInterval;
 let score = 0;
 let linesClearedTotal = 0;
 let level = 1;
-let speed = 500;
+let speed = 1000;
 let highScore = 0;
 let isGameOver = false;
 const SHAPES = {
@@ -185,7 +185,7 @@ function clearLines() {
         linesClearedTotal += linesThisClear;
         score += linesThisClear * 100;
         level = Math.floor(linesClearedTotal / 10) + 1;
-        speed = Math.max(100, 500 - (level - 1) * 30); // speed cap
+        speed = Math.max(100, 1000 - (level - 1) * 10); // speed cap
         clearInterval(gameInterval);
         gameInterval = setInterval(drop, speed);
         updateScore();
@@ -338,7 +338,7 @@ function startGame() {
     score = 0;
     linesClearedTotal = 0;
     level = 1;
-    speed = 500;
+    speed = 1000;
     holdPiece = null;
     canHold = true;
     isGameOver = false;
