@@ -17,6 +17,7 @@ let level=1;
 let speed=1000;
 let highScore=0;
 let isGameOver=false;
+
 const SHAPES= {
     I: [[1, 1, 1, 1]],
         J: [ [1, 0, 0],
@@ -366,6 +367,7 @@ function enableControls() {
 }
 
 function startGame() {
+    document.getElementById("gameStart").style.display="none";
     document.getElementById("gameOverScreen").style.display="none";
     document.getElementById("game").style.visibility="visible";
     document.getElementById("info").style.visibility="visible";
@@ -458,7 +460,7 @@ function addHoldButton(selector, onPress) {
                     , 50); // fast repeat rate
             }
 
-            , 500); // initial delay before repeating
+            , 300); // initial delay before repeating
     }
 
     ;
