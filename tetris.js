@@ -287,8 +287,8 @@ function getGhostPosition() {
 
 function startGame() {
     document.getElementById("gameOverScreen").style.display = "none";
-    document.getElementById("info").style.display = "flex";
-    document.getElementById("game").style.display = "grid";
+    document.getElementById('game').style.visibility = 'visible';
+    document.getElementById('info').style.visibility = 'visible';
     board = Array.from(
         {
             length: ROWS,
