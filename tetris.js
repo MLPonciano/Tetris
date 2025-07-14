@@ -17,10 +17,6 @@ let level=1;
 let speed=1000;
 let highScore=0;
 let isGameOver=false;
-let tetrisMusic = new Audio('tetris_theme.mp3');
-tetrisMusic.loop = true;
-tetrisMusic.volume = 0.5;
-
 const SHAPES= {
     I: [[1, 1, 1, 1]],
         J: [ [1, 0, 0],
@@ -397,8 +393,6 @@ function startGame() {
     draw();
     enableControls();
     loadHighScore();
-    tetrisMusic.currentTime = 0;
-    tetrisMusic.play();
 }
 
 document.addEventListener("keydown", (e)=> {
@@ -464,7 +458,7 @@ function addHoldButton(selector, onPress) {
                     , 50); // fast repeat rate
             }
 
-            , 200); // initial delay before repeating
+            , 300); // initial delay before repeating
     }
 
     ;
@@ -560,8 +554,6 @@ function showGameOverScreen() {
     saveHighScore();
     disableControls();
     isGameOver=true;
-
-    tetrisMusic.pause();
 }
 
 loadHighScore();
