@@ -12,6 +12,11 @@ let grid = [],
     canHold = true;
 let gameInterval;
 let score = 0;
+let linesClearedTotal = 0;
+let level = 1;
+let speed = 500;
+let highScore = 0;
+let isGameOver = false;
 const SHAPES = {
     I: [[1, 1, 1, 1]],
     J: [
@@ -92,6 +97,25 @@ function newPiece() {
 
 function updateScore() {
     scoreDiv.textContent = score;
+    document.getElementById("lines").textContent = linesClearedTotal;
+    document.getElementById("level").textContent = level;
+    if (score > highScore) {
+        saveHighScore();
+    }
+}
+
+function loadHighScore() {
+    const saved = localStorage.getItem("tetrisHighScore");
+    highScore = saved ? JSON.parse(saved) : 0;
+    document.getElementById("topScore").textContent = highScore;
+}
+
+function saveHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("tetrisHighScore", JSON.stringify(highScore));
+        document.getElementById("topScore").textContent = highScore;
+    }
 }
 
 function drawNext() {
@@ -147,17 +171,23 @@ function merge() {
 }
 
 function clearLines() {
-    let linesCleared = 0;
+    let linesThisClear = 0;
     for (let r = ROWS - 1; r >= 0; r--) {
         if (board[r].every((cell) => cell)) {
             board.splice(r, 1);
             board.unshift(new Array(COLS).fill(null));
-            linesCleared++;
+            linesThisClear++;
             r++;
         }
     }
-    if (linesCleared > 0) {
-        score += linesCleared * 100;
+
+    if (linesThisClear > 0) {
+        linesClearedTotal += linesThisClear;
+        score += linesThisClear * 100;
+        level = Math.floor(linesClearedTotal / 10) + 1;
+        speed = Math.max(100, 500 - (level - 1) * 30); // speed cap
+        clearInterval(gameInterval);
+        gameInterval = setInterval(drop, speed);
         updateScore();
     }
 }
@@ -174,15 +204,19 @@ function drop() {
         currentPiece.row++;
     } else {
         merge();
+        score += 5; // +5 ONLY when the block is locked
         clearLines();
         spawnNext();
     }
+    updateScore();
     draw();
 }
 
 function hardDrop() {
-    while (!collision(currentPiece, 1, 0)) currentPiece.row++;
-    drop();
+    while (!collision(currentPiece, 1, 0)) {
+        currentPiece.row++;
+    }
+    drop(); // handles merge, +5 score, and updates
 }
 
 function spawnNext() {
@@ -284,20 +318,30 @@ function getGhostPosition() {
     }
     return ghostRow;
 }
+// Disable and enable controls
+function disableControls() {
+    document
+        .querySelectorAll(".dpad button, .ab-buttons button")
+        .forEach((btn) => (btn.disabled = true));
+}
 
+function enableControls() {
+    document
+        .querySelectorAll(".dpad button, .ab-buttons button")
+        .forEach((btn) => (btn.disabled = false));
+}
 function startGame() {
     document.getElementById("gameOverScreen").style.display = "none";
-    document.getElementById('game').style.visibility = 'visible';
-    document.getElementById('info').style.visibility = 'visible';
-    board = Array.from(
-        {
-            length: ROWS,
-        },
-        () => new Array(COLS).fill(null)
-    );
+    document.getElementById("game").style.visibility = "visible";
+    document.getElementById("info").style.visibility = "visible";
+    board = Array.from({ length: ROWS }, () => new Array(COLS).fill(null));
     score = 0;
+    linesClearedTotal = 0;
+    level = 1;
+    speed = 500;
     holdPiece = null;
     canHold = true;
+    isGameOver = false;
     updateScore();
     createGrid();
     nextPiece = newPiece();
@@ -305,25 +349,33 @@ function startGame() {
     drawHold();
     spawnNext();
     clearInterval(gameInterval);
-    gameInterval = setInterval(drop, 500);
+    gameInterval = setInterval(drop, speed);
     draw();
+    enableControls();
+    loadHighScore();
 }
+
 document.addEventListener("keydown", (e) => {
-    if (!currentPiece) return;
-    if (e.key === "ArrowLeft" && !collision(currentPiece, 0, -1))
+    if (isGameOver || !currentPiece) return;
+
+    if (e.key === "ArrowLeft" && !collision(currentPiece, 0, -1)) {
         currentPiece.col--;
-    else if (e.key === "ArrowRight" && !collision(currentPiece, 0, 1))
+    } else if (e.key === "ArrowRight" && !collision(currentPiece, 0, 1)) {
         currentPiece.col++;
-    else if (e.key === "ArrowDown") drop();
-    else if (e.key === "ArrowUp") rotate();
-    else if (e.key === " " || e.code === "Space") {
+    } else if (e.key === "ArrowDown") {
+        drop();
+    } else if (e.key === "ArrowUp") {
+        rotate();
+    } else if (e.key === " " || e.code === "Space") {
         e.preventDefault();
         hardDrop();
     } else if (e.key === "a" || e.key === "A" || e.key === "Shift") {
         hold();
     }
+
     draw();
 });
+
 document.querySelector(".dpad-left").addEventListener("click", () => {
     if (!currentPiece) return;
     if (!collision(currentPiece, 0, -1)) currentPiece.col--;
@@ -401,4 +453,9 @@ addRepeatListener(".dpad-down", () => {
 function showGameOverScreen() {
     document.getElementById("gameOverScreen").style.display = "flex";
     document.getElementById("finalScore").textContent = score;
+    saveHighScore();
+    disableControls();
+    isGameOver = true;
 }
+
+loadHighScore();
