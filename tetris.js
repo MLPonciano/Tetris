@@ -17,6 +17,9 @@ let level=1;
 let speed=1000;
 let highScore=0;
 let isGameOver=false;
+let tetrisMusic = new Audio('tetris_theme.mp3');
+tetrisMusic.loop = true;
+tetrisMusic.volume = 0.5;
 
 const SHAPES= {
     I: [[1, 1, 1, 1]],
@@ -394,6 +397,8 @@ function startGame() {
     draw();
     enableControls();
     loadHighScore();
+    tetrisMusic.currentTime = 0;
+    tetrisMusic.play();
 }
 
 document.addEventListener("keydown", (e)=> {
@@ -555,6 +560,8 @@ function showGameOverScreen() {
     saveHighScore();
     disableControls();
     isGameOver=true;
+
+    tetrisMusic.pause();
 }
 
 loadHighScore();
