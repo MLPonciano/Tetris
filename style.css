@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,7 +7,13 @@
 
 body {
     font-family: "Press Start 2P", sans-serif;
-    background-color: #222222;
+    background: radial-gradient(circle at center, #888 0%, #444 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #container {
@@ -22,10 +28,11 @@ button {
 #gameBody {
     width: 350px;
     height: 650px;
-    background-color: #b8b4b4;
-    border-radius: 20px;
+    background: linear-gradient(145deg, #c4c4c4, #a9a9a9);
+    border-radius: 15px 15px 50px 15px;
     border: 2px solid #444;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), inset -5px -5px 10px #d4d4d4,
+        inset 5px 5px 10px #888;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,7 +45,7 @@ button {
     height: 350px;
     background-color: #7f9c75;
     margin-top: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: inset 0 0 10px #222;
     position: relative;
 }
@@ -96,7 +103,7 @@ button {
     right: 10px;
     bottom: 10px;
     border: 2px solid #222;
-    border-radius: 10px;
+    border-radius: 5px;
     pointer-events: none;
 }
 
@@ -131,9 +138,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2),
-                0 4px #111,
-                0 6px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 4px #111,
+        0 6px 8px rgba(0, 0, 0, 0.6);
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
 }
@@ -154,9 +160,8 @@ button {
 
 .dpad button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2),
-                0 2px #111,
-                0 3px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 2px #111,
+        0 3px 4px rgba(0, 0, 0, 0.6);
     background: linear-gradient(to bottom, #333 0%, #111 100%);
 }
 .ab-buttons {
@@ -178,20 +183,17 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2),
-                0 5px #600,
-                0 8px 12px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2), 0 5px #600,
+        0 8px 12px rgba(0, 0, 0, 0.7);
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
 }
 .ab-buttons button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2),
-                0 3px #600,
-                0 4px 6px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.2), 0 3px #600,
+        0 4px 6px rgba(0, 0, 0, 0.7);
     background: radial-gradient(circle at 30% 30%, #aa2222, #881111);
 }
-
 
 .start-button {
     margin-top: 10px;
@@ -201,20 +203,17 @@ button {
     border: 2px solid #222;
     border-radius: 20px;
     font-size: 12px;
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2),
-                0 4px #222,
-                0 6px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 4px #222,
+        0 6px 8px rgba(0, 0, 0, 0.6);
     transition: transform 0.1s ease, background 0.2s ease;
     cursor: pointer;
 }
 .start-button:active {
     transform: translateY(2px);
-    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2),
-                0 2px #222,
-                0 3px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2), 0 2px #222,
+        0 3px 4px rgba(0, 0, 0, 0.6);
     background: linear-gradient(to bottom, #555, #222);
 }
-
 
 #next {
     display: grid;
@@ -258,7 +257,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 5px;
     z-index: 10;
     box-shadow: inset 0 0 10px #222;
 }
@@ -271,7 +270,7 @@ button {
     right: 10px;
     bottom: 10px;
     border: 2px solid #222;
-    border-radius: 10px;
+    border-radius: 5px;
     pointer-events: none;
 }
 
