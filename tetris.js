@@ -431,7 +431,7 @@ document.addEventListener("keydown", (e)=> {
 );
 
 // HELD DPAD REPEAT SUPPORT
-const holdIntervals= {}
+/*const holdIntervals= {}
 
 ;
 
@@ -474,7 +474,7 @@ function addHoldButton(selector, onPress) {
     btn.addEventListener("mousedown", start);
 
     btn.addEventListener("touchstart", (e)=> {
-            /*e.preventDefault();*/
+            e.preventDefault();
             start();
         }
 
@@ -506,9 +506,9 @@ addHoldButton(".dpad-down", ()=> {
         drop();
     }
 
-);
+);*/
 
-/*document.querySelector(".dpad-left").addEventListener("click", () => {
+document.querySelector(".dpad-left").addEventListener("click", () => {
     if (!currentPiece) return;
     if (!collision(currentPiece, 0, -1)) currentPiece.col--;
     draw();
@@ -521,7 +521,7 @@ document.querySelector(".dpad-right").addEventListener("click", () => {
 document.querySelector(".dpad-down").addEventListener("click", () => {
     if (!currentPiece) return;
     drop();
-});*/
+});
 document.querySelector(".dpad-up").addEventListener("click", ()=> {
         if ( !currentPiece) return;
         hold();
