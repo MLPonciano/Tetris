@@ -107,11 +107,9 @@ button {
     width: 15px;
     height: 15px;
     transition: background 0.2s ease;
-    border-radius: 1px;
 }
 .cell.ghost {
     border: 1px solid #222;
-    border-radius: 1px;
 }
 
 #gameScreen::before {
@@ -316,7 +314,6 @@ button {
 #next div {
     width: 10px;
     height: 10px;
-    border-radius: 1px;
 }
 
 #hold {
@@ -333,7 +330,6 @@ button {
 #hold div {
     width: 10px;
     height: 10px;
-    border-radius: 1px;
 }
 #gameStart {
     position: absolute;
