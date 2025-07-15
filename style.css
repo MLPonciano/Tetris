@@ -316,6 +316,7 @@ button {
 #next div {
     width: 10px;
     height: 10px;
+    border-radius: 3px;
 }
 
 #hold {
@@ -332,6 +333,7 @@ button {
 #hold div {
     width: 10px;
     height: 10px;
+    border-radius: 3px;
 }
 #gameStart {
     position: absolute;
